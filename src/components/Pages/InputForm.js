@@ -8,19 +8,12 @@ const InputForm = () => {
   //     text: '',
   //   };
 
-  const [txtInput, setTxtInput] = useState('');
-  const [curVal, setCurVal] = useState('');
-  //const previousVal = usePrevious(curVal);
+  const [txtInput, setTxtInput] = useState({});
 
   const handleChange = (key) => (value) => {
     //alert('Change Clicked');
 
-    if (value[1] === null || value[0] === '') {
-      setTxtInput({ [key]: value[0] });
-      setCurVal(value[0]);
-    } else if (value[1] !== null || value[1] !== undefined) {
-      setTxtInput({ [key]: curVal });
-    }
+    setTxtInput({ ...txtInput, [key]: value });
 
     //this.setState({ [key]: value });
   };
@@ -33,38 +26,32 @@ const InputForm = () => {
       <h2>React Reusable Form Component</h2>
       <hr />
       <InputField
-        //value={text}
-        value={txtInput.StringLang}
-        name="StringLang"
+        value={txtInput.EmailLang}
+        name="EmailLang"
         type="text"
-        placeholder="Enter text here..."
-        validators={
-          [Validators.number, Validators.required]
-          // [
-          //   { check: Validators.required, message: 'This field is required' },
-          // ]
-        }
-        //onChange={this.handleChange('text')}
-        onChange={handleChange('StringLang')}
+        validtype="email"
+        placeholder="Enter email here..."
+        validators={[Validators.email, Validators.required]}
+        onChange={handleChange('EmailLang')}
       />
-
+      EmailLang
       <InputField
-        //value={text}
         value={txtInput.NumberLang}
         name="NumberLang"
         type="text"
-        placeholder="Enter text here..."
-        validators={
-          [Validators.number, Validators.required]
-          // [
-          //   {
-          //     check: [Validators.number, Validators.required], //,
-          //     //message: ['Number is not valid', 'This field is required'],
-          //   },
-          // ]
-        }
-        //onChange={this.handleChange('text')}
+        validtype="number"
+        placeholder="Enter number here..."
+        validators={[Validators.number, Validators.required]}
         onChange={handleChange('NumberLang')}
+      />
+      <InputField
+        value={txtInput.MoneyLang}
+        name="MoneyLang"
+        type="text"
+        validtype="money"
+        placeholder="Enter money here..."
+        validators={[Validators.money, Validators.required]}
+        onChange={handleChange('MoneyLang')}
       />
     </div>
   );

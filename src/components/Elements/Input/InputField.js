@@ -10,17 +10,24 @@ const InputField = ({
   validators,
   type,
   onChange,
+  validtype,
 }) => {
   const [error, setError] = useState(false);
+  const [oldVal, setOldVal] = useState('');
 
   const handleChange = (event) => {
     const { value } = event.target;
     setError(validateInput(validators, value));
     const checkError = validateInput(validators, value);
     if (checkError.error === true) {
-      onChange([value, 'error']);
+      if (validtype === 'email') {
+        onChange(value);
+      } else {
+        value === '' ? onChange('') : onChange(oldVal);
+      }
     } else {
-      onChange([value, null]);
+      setOldVal(value);
+      onChange(value);
     }
   };
 
@@ -35,6 +42,7 @@ const InputField = ({
           value={value}
           defaultValue={value}
           onChange={handleChange}
+          validtype={validtype}
         />
       ) : (
         <input
@@ -43,6 +51,7 @@ const InputField = ({
           className="form-control"
           placeholder={placeholder}
           onChange={handleChange}
+          validtype={validtype}
         />
       )}
       {error && <span className="text-danger">{error.message}</span>}

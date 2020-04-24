@@ -3,6 +3,7 @@ const regex = {
     '^(([^<>()\\[\\]\\\\.,;:\\s@]+(\\.[^<>()\\[\\]\\\\.,;:\\s@]+)*)|(.+))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'
   ),
   number: new RegExp('^[0-9]+$'),
+  money: new RegExp('^\\$?\\d+(,\\d{3})*(\\.\\d*)?$'),
 };
 
 export class Validators {
@@ -30,7 +31,18 @@ export class Validators {
         return { error: true, message };
       }
     }
+    return false;
+  }
 
+  static money(value, message) {
+    const length = value ? value.toString().length : 0;
+
+    if (length > 0) {
+      const result = regex.money.test(value);
+      if (!result) {
+        return { error: true, message };
+      }
+    }
     return false;
   }
 }
