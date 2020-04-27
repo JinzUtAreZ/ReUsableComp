@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import InputField from '../Elements/Input/InputField';
 import { Validators } from '../Elements/Input/Validator';
 
@@ -22,10 +22,9 @@ const InputForm = () => {
   //const { text } = this.state;
 
   return (
-    <div className="container">
-      <h2>React Reusable Form Component</h2>
-      <hr />
+    <Fragment>
       <InputField
+        label="Email Address"
         value={txtInput.EmailLang}
         name="EmailLang"
         type="text"
@@ -34,8 +33,9 @@ const InputForm = () => {
         validators={[Validators.email, Validators.required]}
         onChange={handleChange('EmailLang')}
       />
-      EmailLang
+
       <InputField
+        label="Numbers Only"
         value={txtInput.NumberLang}
         name="NumberLang"
         type="text"
@@ -45,6 +45,7 @@ const InputForm = () => {
         onChange={handleChange('NumberLang')}
       />
       <InputField
+        label="Money Currency"
         value={txtInput.MoneyLang}
         name="MoneyLang"
         type="text"
@@ -53,7 +54,7 @@ const InputForm = () => {
         validators={[Validators.money, Validators.required]}
         onChange={handleChange('MoneyLang')}
       />
-    </div>
+    </Fragment>
   );
 };
 // }

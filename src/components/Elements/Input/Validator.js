@@ -56,7 +56,10 @@ function msgData(value) {
     val = 'Email format is incorrect';
   }
   if (value === 'number') {
-    val = 'Numbers only';
+    val = 'Please input numbers only';
+  }
+  if (value === 'money') {
+    val = 'Please input money value only';
   }
   return val;
 }

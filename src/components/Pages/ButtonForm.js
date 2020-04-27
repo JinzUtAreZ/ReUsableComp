@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import Container from 'react-bootstrap/Container';
+import React, { useState, Fragment } from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from '../Elements/Button/ButtonTypes';
 
-const TestForm = () => {
+const ButtonForm = () => {
   const [btnAble, setBtnAble] = useState(false);
   const [btnHide, setBtnHide] = useState(true);
 
@@ -28,7 +27,21 @@ const TestForm = () => {
   };
 
   return (
-    <Container>
+    <Fragment>
+      <Row>
+        <Col sm={4}>
+          <Button value="back" text="Back" onClick={eventGoClick} />
+        </Col>
+        <Col sm={4}>
+          <Button
+            value="next"
+            text="Next"
+            visible={btnHide}
+            onClick={eventClick}
+          />
+        </Col>
+      </Row>
+      <br />
       <Row>
         <Col sm={8}>
           <Button
@@ -39,6 +52,8 @@ const TestForm = () => {
             onClick={eventClick}
           />
         </Col>
+      </Row>
+      <Row>
         <Col sm={4}>
           <Button
             value="update"
@@ -48,26 +63,14 @@ const TestForm = () => {
             onClick={eventClick}
           />
         </Col>
-      </Row>
-      <Row>
-        <Col sm>
-          <Button value="back" text="Go Back" onClick={eventGoClick} />
-        </Col>
-        <Col sm>
-          <Button
-            value="next"
-            text="Next"
-            visible={btnHide}
-            onClick={eventClick}
-          />
-        </Col>
+
         <Col sm>
           <Button value="view" text="View Data" onClick={eventClick} />
           <Button value="mail" text="Post Email" onClick={eventClick} />
         </Col>
       </Row>
-    </Container>
+    </Fragment>
   );
 };
 
-export default TestForm;
+export default ButtonForm;
